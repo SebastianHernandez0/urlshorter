@@ -4,7 +4,7 @@ const {
   registrarUsuario,
   consultarUsuarioByid,
   verificarUsuario,
-} = require("../models/userMode");
+} = require("../models/userModel");
 
 passport.use(
   new GoogleStrategy(

@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const cors = require('cors');
 const session=require('express-session');
 const passport= require('./controllers/passportConfig')
+const shortenRoutes= require('./routes/urlRoutes');
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
@@ -20,6 +21,7 @@ app.use(passport.session())
 
 app.use('/usuarios', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/url', shortenRoutes);
 
 
 app.get('*', (req, res) => {
