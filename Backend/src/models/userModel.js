@@ -13,6 +13,12 @@ const consultarUsuario= async()=>{
     return users;
 }
 
+const consultarUrls= async()=>{
+    const query= `SELECT * FROM urls`;
+    const {rows:urls}= await db.query(query);
+    return urls;
+}
+
 const consultarUsuarioByid= async(id)=>{
     const query= `SELECT * FROM usuarios WHERE id=$1`;
     const {rows:users}= await db.query(query,[id]);
@@ -49,10 +55,16 @@ const verificarUsuario= async(email)=>{
         throw error;
     }}
 
-const acortarUrl= async(url,id)=>{
+const acortarUrl= async(original_url,id)=>{
     try{
+        const databaseUrls= await consultarUrls();
+        const url= databaseUrls.find(url=>url.original_url===original_url);
+        
+        if(databaseUrls.find(url=>url.original_url===original_url)){
+            return url.short_url;
+        }
         const short_url= shortcode();
-        const values= [id,url,short_url];
+        const values= [id,original_url,short_url];
         const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url,created_at) values (DEFAULT,$1,$2,$3,DEFAULT) returning short_url';    
         const {rows:urls}= await db.query(query,values);
         return urls[0].short_url;

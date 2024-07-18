@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const {
   consultarUsuario,
-  acortarUrl
+  acortarUrl,
+  consultarUrls
   
 } = require("../models/userModel");
 
@@ -23,10 +24,9 @@ const shortenUrl= async (req,res)=>{
         jwt.verify(token,process.env.JWT_SECRET);
         const {id}= jwt.decode(token);
         const shortUrl= await acortarUrl(url,id);
-        console.log(shortUrl)
         res.json({url: `http://localhost:3000/${shortUrl}`  })
     }catch (error) {
-        res.status(500).json({ mensaje: "Error al acortar url" });
+        res.status(500).json({error: error.message});
     }
 }
 
