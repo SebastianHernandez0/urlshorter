@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const {
   consultarUsuario,
   acortarUrl,
-  consultarUrls
+  consultarUrls,
+  consultarShortUrl
   
 } = require("../models/userModel");
 
@@ -30,8 +31,19 @@ const shortenUrl= async (req,res)=>{
     }
 }
 
+const getShortUrl= async (req,res)=>{
+    try {
+        const shortUrl= req.params.shortUrl;
+        console.log("Short url: ", shortUrl);
+        const originalUrl= await consultarShortUrl(shortUrl);
+        res.redirect(originalUrl);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
 
 module.exports = {
   getUsuarios,
-  shortenUrl           
+  shortenUrl,
+  getShortUrl
 }

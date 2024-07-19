@@ -21,7 +21,7 @@ app.use(passport.session())
 
 app.use('/usuarios', userRoutes);
 app.use('/auth', authRoutes);
-app.use('/url', shortenRoutes);
+app.use('/', shortenRoutes);
 
 
 app.get('*', (req, res) => {

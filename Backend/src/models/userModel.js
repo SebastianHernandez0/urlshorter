@@ -13,9 +13,9 @@ const consultarUsuario= async()=>{
     return users;
 }
 
-const consultarUrls= async()=>{
-    const query= `SELECT * FROM urls`;
-    const {rows:urls}= await db.query(query);
+const consultarUrls= async(id)=>{
+    const query= `SELECT * FROM urls WHERE usuario_id=$1`;
+    const {rows:urls}= await db.query(query,[id]);
     return urls;
 }
 
@@ -57,7 +57,7 @@ const verificarUsuario= async(email)=>{
 
 const acortarUrl= async(original_url,id)=>{
     try{
-        const databaseUrls= await consultarUrls();
+        const databaseUrls= await consultarUrls(id);
         const url= databaseUrls.find(url=>url.original_url===original_url);
         
         if(databaseUrls.find(url=>url.original_url===original_url)){
@@ -75,6 +75,20 @@ const acortarUrl= async(original_url,id)=>{
         throw error;
     }}  
 
+
+const consultarShortUrl= async(short_url)=>{
+    try {
+        const query='SELECT original_url FROM urls WHERE short_url=$1';
+        const {rows}= await db.query(query,[short_url]);
+        if(rows.length===0){
+            return "Url no encontrada";
+        }
+        const original_url= rows[0].original_url;
+        return original_url;
+    } catch (error) {
+        
+    }}
+
 module.exports={
-    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl
+    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl
 }
