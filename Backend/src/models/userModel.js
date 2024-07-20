@@ -1,11 +1,9 @@
 const db= require('../config/database');
-const jwt = require('jsonwebtoken');
+
 
 function shortcode(){
     return Math.random().toString(36).substring(2,8);
 }
-
-
 
 const consultarUsuario= async()=>{
     const query= `SELECT * FROM usuarios`;
@@ -14,9 +12,15 @@ const consultarUsuario= async()=>{
 }
 
 const consultarUrls= async(id)=>{
-    const query= `SELECT * FROM urls WHERE usuario_id=$1`;
-    const {rows:urls}= await db.query(query,[id]);
-    return urls;
+    if(id){
+        const query= `SELECT * FROM urls WHERE usuario_id=$1`;
+        const {rows:urls}= await db.query(query,[id]);
+        return urls;
+    }else{
+        const query= `SELECT * FROM urls`;
+        const {rows:urls}= await db.query(query);
+        return urls;
+    }
 }
 
 const consultarUsuarioByid= async(id)=>{
@@ -57,17 +61,31 @@ const verificarUsuario= async(email)=>{
 
 const acortarUrl= async(original_url,id)=>{
     try{
-        const databaseUrls= await consultarUrls(id);
-        const url= databaseUrls.find(url=>url.original_url===original_url);
-        
-        if(databaseUrls.find(url=>url.original_url===original_url)){
-            return url.short_url;
+        if(id){
+            const databaseUrls= await consultarUrls(id);
+            const url= databaseUrls.find(url=>url.original_url===original_url);
+            
+            if(databaseUrls.find(url=>url.original_url===original_url)){
+                return url.short_url;
+            }
+            const short_url= shortcode();
+            const values= [id,original_url,short_url];
+            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url,created_at) values (DEFAULT,$1,$2,$3,DEFAULT) returning short_url';    
+            const {rows:urls}= await db.query(query,values);
+            return urls[0].short_url;}
+        else{
+            const databaseUrls= await consultarUrls();
+            const url= databaseUrls.find(url=>url.original_url===original_url);
+            
+            if(databaseUrls.find(url=>url.original_url===original_url)){
+                return url.short_url;
+            }
+            const short_url= shortcode();
+            const values= [original_url,short_url];
+            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url,created_at) values (DEFAULT,null,$1,$2,DEFAULT) returning short_url';    
+            const {rows:urls}= await db.query(query,values);
+            return urls[0].short_url;
         }
-        const short_url= shortcode();
-        const values= [id,original_url,short_url];
-        const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url,created_at) values (DEFAULT,$1,$2,$3,DEFAULT) returning short_url';    
-        const {rows:urls}= await db.query(query,values);
-        return urls[0].short_url;
         
     }
     catch (error) {
@@ -90,5 +108,5 @@ const consultarShortUrl= async(short_url)=>{
     }}
 
 module.exports={
-    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl
+    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl,consultarUrls
 }
