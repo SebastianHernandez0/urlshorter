@@ -20,21 +20,28 @@
   .dropdown-menu {
     position: absolute;
     right: 0;
-    background-color: white;
+    color: #fff;
+    background: black;
     color: black;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 0.5rem;
-    width: 150px;
+    width: 120px;
     padding: 0.5rem;
+  }
+  .navbar-profile:hover{
+    cursor: pointer;
   }
   
 
   
   .dropdown-menu__link {
-    padding: 0.5rem 1rem;
     cursor: pointer;
+  }
+
+  .dropdown-menu__link:hover {
+    border-bottom: 1px solid #fff;
   }
   
  

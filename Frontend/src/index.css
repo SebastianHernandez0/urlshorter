@@ -2,11 +2,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #fff;
   
 }
+
+
 h1,h2,h3,h4{
   text-wrap: balance;
+  
 }
+
+@font-face {
+  font-family: Link;
+  src: url(./assets/linkinpark_chase/linkinpark.ttf);
+}
+@font-face {
+  font-family: alway;
+  src: url(./assets/always_good/AlwaysGood.ttf);
+}
+
 
 p{
   text-wrap: pretty;
@@ -22,7 +36,8 @@ ul {
 
 body {
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden scroll;
+  height: 100vh;
+  background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
+
 }
+

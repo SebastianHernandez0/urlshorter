@@ -1,6 +1,7 @@
 import './home.css'   
 import axios from 'axios'
 import {useEffect, useState} from 'react'
+import { FaLink } from 'react-icons/fa';
 
 export default function Home() {
     const [url, setUrl] = useState('');
@@ -53,7 +54,7 @@ export default function Home() {
     }
     return (
         <form className='home' onSubmit={handleForm}>
-            <h1>Servicio de Acortar Urls</h1>
+            <h1 className='home__h1'>Pega tu URL <FaLink></FaLink></h1>
             <div className='home__input-container'>
                 <input
                 onChange={handleInput}
@@ -67,8 +68,8 @@ export default function Home() {
             {url && (
                 <div className='home__urls'>
                     <br></br>
-                    <h2>Url acortada:</h2>
-                    <a href={url} target='_blank' rel='noopener noreferrer'>{url}</a>
+                    <h2>Url : <a href={url} target='_blank' rel='noopener noreferrer' className='home__url'>{url}</a></h2>
+                    
                 </div>
             )}
         </form>

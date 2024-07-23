@@ -46,7 +46,7 @@ export default function Navbar() {
         <div>
         <div className="navbar-menu">
           <div className="profile">
-            <FaUserCircle size={30} onClick={handleAvatarClick} />
+            <FaUserCircle className='navbar-profile' size={30} onClick={handleAvatarClick} />
             {menuOpen && (
               <div className="dropdown-menu">
                 <ul>
@@ -56,7 +56,7 @@ export default function Navbar() {
                       <Link className='dropdown-menu__link' to='/userUrls' onClick={handleCloseMenu}>Mis URLs</Link>
                     </li>
                     <li>
-                    <Link className='dropdown-menu__link' to='/logout' onClick={handleLogout}>Cerrar sesión</Link>
+                    <Link className='dropdown-menu__link' to='/' onClick={handleLogout}>Cerrar sesión</Link>
                   </li>
                   </>
                   ) : (
