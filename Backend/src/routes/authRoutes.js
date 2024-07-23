@@ -7,8 +7,9 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req,res)=>{
     try {
+        console.log('usuario auth: ', req.user);
         const token= jwt.sign({email: req.user.email, id: req.user.id}, process.env.JWT_SECRET, {expiresIn: '1d'});
-        res.redirect(`/sucess?token=${token}`);
+        res.redirect(`http://localhost:5173/success?token=${token}`);
         console.log("Token generado: ", token);
 
     } catch (error) {

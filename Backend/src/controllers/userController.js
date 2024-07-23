@@ -60,9 +60,19 @@ const getUrlsFromUser= async (req,res)=>{
     }
 }
 
+const getAllUrls= async(req,res)=>{
+    try {
+        const urls=await consultarUrls();
+        res.json(urls);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
 module.exports = {
   getUsuarios,
   shortenUrl,
   getShortUrl,
-  getUrlsFromUser
+  getUrlsFromUser,
+  getAllUrls
 }

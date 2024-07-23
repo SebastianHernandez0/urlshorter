@@ -1,9 +1,28 @@
-*{
+* {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  
+}
+h1,h2,h3,h4{
+  text-wrap: balance;
 }
 
-body{
+p{
+  text-wrap: pretty;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+	list-style: none;
+}
+
+body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden scroll;
 }
