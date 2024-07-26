@@ -1,5 +1,5 @@
 import './login.css'
-import axios from 'axios'
+
 export default function Login() {
     const handleGoogleAuth= ()=>{
         window.location.href='http://localhost:3000/auth/google'
@@ -8,8 +8,17 @@ export default function Login() {
 
     return (
         <div className="login">
-            <h1>Iniciar sesión</h1>
-            <img onClick={handleGoogleAuth} className="logo" src="google.png"></img>
+            <div className='login__container'>
+                <img src="url-link.jpg" className="logo-url"></img>
+            <h1>Log in to Surls</h1>
+            <h5 className='login__h5'>Log in with your Google account</h5>
+            <div className='login__google-button' onClick={handleGoogleAuth}>
+            <img  className="logo" src="google.png"></img>
+            <h5>Continue with Google</h5>
+            </div>
+            
+            </div>
+            
         </div>
     )
 }

@@ -70,7 +70,7 @@ const acortarUrl= async(original_url,id)=>{
             }
             const short_url= shortcode();
             const values= [id,original_url,short_url];
-            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url,created_at) values (DEFAULT,$1,$2,$3,DEFAULT) returning short_url';    
+            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url) values (DEFAULT,$1,$2,$3) returning short_url';    
             const {rows:urls}= await db.query(query,values);
             return urls[0].short_url;}
         else{
@@ -82,7 +82,7 @@ const acortarUrl= async(original_url,id)=>{
             }
             const short_url= shortcode();
             const values= [original_url,short_url];
-            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url,created_at) values (DEFAULT,null,$1,$2,DEFAULT) returning short_url';    
+            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url) values (DEFAULT,null,$1,$2) returning short_url';    
             const {rows:urls}= await db.query(query,values);
             return urls[0].short_url;
         }

@@ -11,7 +11,7 @@ const Success = () => {
             localStorage.setItem('token', token);
            
             window.dispatchEvent(new Event('storage'));
-            navigate('/userUrls');  
+            navigate('/');  
         } else {
             navigate('/login'); 
         }
