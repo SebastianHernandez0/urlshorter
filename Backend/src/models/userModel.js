@@ -107,6 +107,17 @@ const consultarShortUrl= async(short_url)=>{
         
     }}
 
+const eliminarUrlFromuser= async(idUser,idUrl)=>{
+    try{
+        const values=[idUser,idUrl];
+        const query= 'DELETE FROM urls WHERE usuario_id=$1 AND id=$2';
+        const {rows}=await db.query(query,values);
+        return rows;
+    }catch (error) {
+        console.log("Error en eliminar url",error);
+        throw error;
+    }}
+
 module.exports={
-    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl,consultarUrls
+    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl,consultarUrls,eliminarUrlFromuser
 }

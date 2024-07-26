@@ -3,7 +3,8 @@ const {
   consultarUsuario,
   acortarUrl,
   consultarUrls,
-  consultarShortUrl
+  consultarShortUrl,
+  eliminarUrlFromuser
   
 } = require("../models/userModel");
 
@@ -69,10 +70,26 @@ const getAllUrls= async(req,res)=>{
     }
 }
 
+const deleteUrl= async(req,res)=>{
+    try{
+        const Authorization= req.header('Authorization');
+        const token= Authorization.split('Bearer ')[1];
+        jwt.verify(token,process.env.JWT_SECRET)
+        const {id}= jwt.decode(token);
+        const idUrl= req.params.idUrl;
+        await eliminarUrlFromuser(id,idUrl);
+        console.log(`El usuario ${id} ha eliminado la url ${idUrl}`);
+        res.json("Url eliminada");
+    }catch (error) {
+        res.status(500).json({error: error.message});
+    }
+
+}
 module.exports = {
   getUsuarios,
   shortenUrl,
   getShortUrl,
   getUrlsFromUser,
-  getAllUrls
+  getAllUrls,
+  deleteUrl
 }
