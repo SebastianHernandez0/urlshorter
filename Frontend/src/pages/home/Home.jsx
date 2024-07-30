@@ -27,12 +27,12 @@ export default function Home() {
         }
         const token = localStorage.getItem('token');
         const config= isAuthenticated ?{
-            url: 'http://localhost:3000/',
+            url: 'https://urlshorter-uat6.onrender.com/',
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }:{
-            url: 'http://localhost:3000/u',
+            url: 'https://urlshorter-uat6.onrender.com/u',
         }
         axios.post(config.url, {url: input}, config)
         .then((response)=>{

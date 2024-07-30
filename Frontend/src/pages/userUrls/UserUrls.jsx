@@ -16,7 +16,7 @@ const UserUrls = () => {
     }
 
     axios
-      .get("http://localhost:3000/usuarios", {
+      .get("https://urlshorter-uat6.onrender.com/usuarios", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ const UserUrls = () => {
     const token = localStorage.getItem("token");
     if (window.confirm("¿Seguro que quieres eliminar esta URL?")) {
       try{
-        await axios.delete("http://localhost:3000/usuarios/"+idUrl,{
+        await axios.delete("https://urlshorter-uat6.onrender.com/usuarios/"+idUrl,{
           headers: {
             Authorization: `Bearer ${token}`,
           },

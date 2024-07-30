@@ -2,7 +2,7 @@ import './login.css'
 
 export default function Login() {
     const handleGoogleAuth= ()=>{
-        window.location.href='http://localhost:3000/auth/google'
+        window.location.href='https://urlshorter-uat6.onrender.com/auth/google'
     }
 
 
