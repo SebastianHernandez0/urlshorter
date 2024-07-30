@@ -9,7 +9,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
     try {
         console.log('usuario auth: ', req.user);
         const token= jwt.sign({email: req.user.email, id: req.user.id}, process.env.JWT_SECRET, {expiresIn: '1d'});
-        res.redirect(`http://localhost:5173/success?token=${token}`);
+        res.redirect(`https://surl-one.vercel.app/success?token=${token}`);
         console.log("Token generado: ", token);
 
     } catch (error) {
