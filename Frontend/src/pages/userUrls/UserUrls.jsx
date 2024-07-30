@@ -60,11 +60,11 @@ const UserUrls = () => {
           <li className="user-urls__url" key={index}>
             <div>{url.original_url}</div>
             <a
-              href={"http://localhost:3000/" + url.short_url}
+              href={"https://urlshorter-uat6.onrender.com/" + url.short_url}
               target="_blank"
               rel="noopener noreferrer"
             >
-             <span className="user_span">{"http://localhost:3000/" + url.short_url}</span> 
+             <span className="user_span">{"https://surl-one.vercel.app/" + url.short_url}</span> 
             </a>
             
               <FaTrash size={30}  className="delete__button" onClick={()=>deleteUrl(url.id)}/>
