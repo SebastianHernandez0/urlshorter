@@ -68,7 +68,7 @@ export default function Home() {
             {url && (
                 <div className='home__urls'>
                     <br></br>
-                    <h2>Url : <a href={url} target='_blank' rel='noopener noreferrer' className='home__url'>{url}</a></h2>
+                    <h2><a href={url} target='_blank' rel='noopener noreferrer' className='home__url'>{url}</a></h2>
                     
                 </div>
             )}
