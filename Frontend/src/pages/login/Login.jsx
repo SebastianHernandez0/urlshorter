@@ -2,7 +2,7 @@ import './login.css'
 
 export default function Login() {
     const handleGoogleAuth= ()=>{
-        window.location.href='https://urlshorter-uat6.onrender.com/auth/google'
+        window.location.href='https://urlshorter-beryl.vercel.app/auth/google'
     }
 
 

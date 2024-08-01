@@ -27,10 +27,10 @@ const shortenUrl= async (req,res)=>{
             jwt.verify(token,process.env.JWT_SECRET);
             const {id}= jwt.decode(token);
             const shortUrl= await acortarUrl(url,id);
-            res.json({url: `https://urlshorter-uat6.onrender.com/${shortUrl}`  })
+            res.json({url: `https://urlshorter-beryl.vercel.app/${shortUrl}`  })
         }else{
             const shortUrl= await acortarUrl(url);
-            res.json({url: `https://urlshorter-uat6.onrender.com/${shortUrl}`  })
+            res.json({url: `https://urlshorter-beryl.vercel.app/${shortUrl}`  })
         }
     }catch (error) {
         res.status(500).json({error: error.message});

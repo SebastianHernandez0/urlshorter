@@ -16,7 +16,7 @@ const UserUrls = () => {
     }
 
     axios
-      .get("https://urlshorter-uat6.onrender.com/usuarios", {
+      .get("https://urlshorter-beryl.vercel.app/usuarios", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ const UserUrls = () => {
     const token = localStorage.getItem("token");
     if (window.confirm("¿Seguro que quieres eliminar esta URL?")) {
       try{
-        await axios.delete("https://urlshorter-uat6.onrender.com/usuarios/"+idUrl,{
+        await axios.delete("https://urlshorter-beryl.vercel.app/usuarios/"+idUrl,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,7 +60,7 @@ const UserUrls = () => {
           <li className="user-urls__url" key={index}>
             <div>{url.original_url}</div>
             <a
-              href={"https://urlshorter-uat6.onrender.com/" + url.short_url}
+              href={"https://urlshorter-beryl.vercel.app/" + url.short_url}
               target="_blank"
               rel="noopener noreferrer"
             >

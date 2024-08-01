@@ -27,12 +27,12 @@ export default function Home() {
         }
         const token = localStorage.getItem('token');
         const config= isAuthenticated ?{
-            url: 'https://urlshorter-uat6.onrender.com/',
+            url: 'https://urlshorter-beryl.vercel.app/',
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }:{
-            url: 'https://urlshorter-uat6.onrender.com/u',
+            url: 'https://urlshorter-beryl.vercel.app/u',
         }
         axios.post(config.url, {url: input}, config)
         .then((response)=>{
