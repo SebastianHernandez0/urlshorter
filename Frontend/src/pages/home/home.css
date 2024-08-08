@@ -46,6 +46,13 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
     
 }
+.home__input-container2{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: 70%;
+    justify-content: center;
+}
 
 @media screen and (max-width: 670px) {
     .home__h1{

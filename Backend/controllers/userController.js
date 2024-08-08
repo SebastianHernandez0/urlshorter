@@ -21,14 +21,24 @@ const getUsuarios = async (req, res) => {
 const shortenUrl= async (req,res)=>{
     try{
         const url= req.body.url
+        const customName= req.body.customName
         const Authorization= req.header('Authorization');
-        if(Authorization){
+        if(Authorization && customName){
+            const token= Authorization.split('Bearer ')[1];
+            jwt.verify(token,process.env.JWT_SECRET);
+            const {id}= jwt.decode(token);
+            const shortUrl= await acortarUrl(url,id, customName);
+            res.json({url: `https://urlshorter-beryl.vercel.app/${shortUrl}`  })
+        }if(Authorization && !customName){
             const token= Authorization.split('Bearer ')[1];
             jwt.verify(token,process.env.JWT_SECRET);
             const {id}= jwt.decode(token);
             const shortUrl= await acortarUrl(url,id);
             res.json({url: `https://urlshorter-beryl.vercel.app/${shortUrl}`  })
-        }else{
+        }if(!Authorization && customName){
+            const shortUrl= await acortarUrl(url,null,customName);
+            res.json({url: `https://urlshorter-beryl.vercel.app/${shortUrl}`  })
+        }if(!Authorization && !customName){
             const shortUrl= await acortarUrl(url);
             res.json({url: `https://urlshorter-beryl.vercel.app/${shortUrl}`  })
         }

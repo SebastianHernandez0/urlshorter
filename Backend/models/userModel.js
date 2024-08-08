@@ -59,9 +59,9 @@ const verificarUsuario= async(email)=>{
         throw error;
     }}
 
-const acortarUrl= async(original_url,id)=>{
+const acortarUrl= async(original_url,id,customName)=>{
     try{
-        if(id){
+        if(id && !customName){
             const databaseUrls= await consultarUrls(id);
             const url= databaseUrls.find(url=>url.original_url===original_url);
             
@@ -73,7 +73,34 @@ const acortarUrl= async(original_url,id)=>{
             const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url) values (DEFAULT,$1,$2,$3) returning short_url';    
             const {rows:urls}= await db.query(query,values);
             return urls[0].short_url;}
-        else{
+        
+        if(customName && id){
+            const databaseUrls= await consultarUrls(id);
+            const url= databaseUrls.find(url=>url.original_url===original_url);
+            
+            if(databaseUrls.find(url=>url.original_url===original_url)){
+                return url.short_url;
+            }
+            const short_url= customName;
+            const values= [id,original_url,short_url];
+            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url) values (DEFAULT,$1,$2,$3) returning short_url';    
+            const {rows:urls}= await db.query(query,values);
+            return urls[0].short_url;
+        }
+        if(customName && !id){
+            const databaseUrls= await consultarUrls();
+            const url= databaseUrls.find(url=>url.original_url===original_url);
+            
+            if(databaseUrls.find(url=>url.original_url===original_url)){
+                return url.short_url;
+            }
+            const short_url= customName;
+            const values= [original_url,short_url];
+            const query= 'INSERT INTO urls (id,usuario_id,original_url,short_url) values (DEFAULT,null,$1,$2) returning short_url';    
+            const {rows:urls}= await db.query(query,values);
+            return urls[0].short_url;
+        }
+        if(!customName && !id){
             const databaseUrls= await consultarUrls();
             const url= databaseUrls.find(url=>url.original_url===original_url);
             
