@@ -77,13 +77,22 @@ const UserUrls = () => {
         {urls.map((url, index) => (
           <li className="user-urls__url" key={index}>
             <div>{url.original_url}</div>
-            <a
+            {editId== url.id? (
+              <input
+              type="text"
+              value={editShortUrl}
+              onChange={(e) => setEditShortUrl(e.target.value)}
+              placeholder="Nueva short URL"
+            />
+            ):
+            (<a
               href={"https://urlshorter-beryl.vercel.app/" + url.short_url}
               target="_blank"
               rel="noopener noreferrer"
             >
              <span className="user_span">{"https://surl-one.vercel.app/" + url.short_url}</span> 
-            </a>
+            </a>)}
+            
             
               <FaTrash size={30}  className="delete__button" onClick={()=>deleteUrl(url.id)}/>
                 {editId== url.id ? (
