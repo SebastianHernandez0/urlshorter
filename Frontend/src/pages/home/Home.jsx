@@ -50,6 +50,8 @@ export default function Home() {
           window.location.href = "/login";
         }
       });
+      setInput("");
+      setCustomName("");
   };
 
   const handleInput = (e) => {
