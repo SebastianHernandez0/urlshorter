@@ -59,7 +59,7 @@ const UserUrls = () => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            short_url: editShortUrl
+            newShortUrl: editShortUrl
           });
           setUrls(urls.map(url=>url.id===idUrl?{id:url.id,original_url:url.original_url,short_url:editShortUrl}:url));
         }catch(error){
