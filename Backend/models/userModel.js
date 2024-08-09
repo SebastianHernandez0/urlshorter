@@ -145,6 +145,17 @@ const eliminarUrlFromuser= async(idUser,idUrl)=>{
         throw error;
     }}
 
+const modificarShortUrl= async(idUser,idUrl,newShortUrl)=>{
+    try{
+        const values=[idUser,idUrl,newShortUrl];
+        const query= 'UPDATE urls SET short_url=$3 WHERE id=$2 AND usuario_id=$1';
+        const {rows}=await db.query(query,values);
+        return rows;
+    }catch (error) {
+        console.log("Error en modificar url",error);
+        throw error;
+    }}
+
 module.exports={
-    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl,consultarUrls,eliminarUrlFromuser
+    consultarUsuario,verificarUsuario,consultarUsuarioByid,registrarUsuario,acortarUrl,consultarShortUrl,consultarUrls,eliminarUrlFromuser,modificarShortUrl
 }

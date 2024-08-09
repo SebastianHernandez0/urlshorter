@@ -4,7 +4,8 @@ const {
   acortarUrl,
   consultarUrls,
   consultarShortUrl,
-  eliminarUrlFromuser
+  eliminarUrlFromuser,
+  modificarShortUrl
   
 } = require("../models/userModel");
 
@@ -95,11 +96,28 @@ const deleteUrl= async(req,res)=>{
     }
 
 }
+const updateShortUrl= async(req,res)=>{
+    try{
+        const Authorization= req.header('Authorization');
+        const token= Authorization.split('Bearer ')[1];
+        jwt.verify(token,process.env.JWT_SECRET)
+        const {id}= jwt.decode(token);
+        const idUrl= req.params.idUrl;
+        const newShortUrl= req.body.newShortUrl;
+        await modificarShortUrl(id,idUrl,newShortUrl);
+        console.log(`El usuario ${id} ha modificado la url ${idUrl} a ${newShortUrl}`);
+        res.json("Url modificada");
+    }catch (error) {
+        res.status(500).json({error: error.message});
+    }
+
+}
 module.exports = {
   getUsuarios,
   shortenUrl,
   getShortUrl,
   getUrlsFromUser,
   getAllUrls,
-  deleteUrl
+  deleteUrl,
+  updateShortUrl
 }
