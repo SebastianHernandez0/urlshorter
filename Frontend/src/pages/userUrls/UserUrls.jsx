@@ -56,10 +56,12 @@ const UserUrls = () => {
       if (window.confirm("¿Seguro que quieres actualizar el short url?")) {
         try{
           await axios.put("https://urlshorter-beryl.vercel.app/usuarios/"+idUrl,{
+            newShortUrl:editShortUrl},
+            {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            newShortUrl: editShortUrl
+            
           });
           setUrls(urls.map(url=>url.id===idUrl?{id:url.id,original_url:url.original_url,short_url:editShortUrl}:url));
         }catch(error){
@@ -78,12 +80,19 @@ const UserUrls = () => {
           <li className="user-urls__url" key={index}>
             <div>{url.original_url}</div>
             {editId== url.id? (
-              <input
+              <>
+              <div className="edit__input-container">
+              <h5 className="h4__input-container">https://surl-one.vercel.app/</h5>
+              <input className="edit__input"
               type="text"
               value={editShortUrl}
               onChange={(e) => setEditShortUrl(e.target.value)}
-              placeholder="Nueva short URL"
-            />
+              />
+              </div>
+              
+            
+              </>
+              
             ):
             (<a
               href={"https://urlshorter-beryl.vercel.app/" + url.short_url}
@@ -92,14 +101,16 @@ const UserUrls = () => {
             >
              <span className="user_span">{"https://surl-one.vercel.app/" + url.short_url}</span> 
             </a>)}
-            
-            
-              <FaTrash size={30}  className="delete__button" onClick={()=>deleteUrl(url.id)}/>
+            <div className="url__actions">
+            <FaTrash size={30}  className="delete__button" onClick={()=>deleteUrl(url.id)}/>
                 {editId== url.id ? (
-                  <button onClick={() => handleUpdateShortUrl(url.id)}>Guardar</button>
+                  <button className="update__button" onClick={() => handleUpdateShortUrl(url.id)}>Guardar</button>
                 ) : (
                   <FaEdit size={30}  className="edit__button" onClick={() => { setEditId(url.id); setEditShortUrl(url.short_url); }}/>
                 )}
+            </div>
+            
+              
               
           </li>
         ))}

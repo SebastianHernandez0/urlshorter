@@ -45,3 +45,38 @@
 .delete__button{
     cursor: pointer;
      }
+
+.url__actions{
+    display: flex;
+    gap: 1rem;
+}
+
+.update__button{
+    background-color: rgb(0, 136, 0);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.edit__input{
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    
+    color: black;
+}
+
+.edit__input-container{
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    
+}
+
+.h4__input-container{
+    color: rgb(0, 136, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+
+}
